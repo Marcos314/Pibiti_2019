@@ -1,0 +1,23 @@
+
+--------------------------------------- DETECÇÃO DE COMUNIDADES --------------------------------------- 
+
+Forneceremos detalhes sobre os algoritmos de detecção da comunidade mais representativos:
+
+• Contagem de triângulos e coeficiente de agrupamento para a densidade geral do relacionamento
+• Componentes fortemente conectados e componentes conectados para encontrar clusters conectados
+• Propagação de etiquetas para inferir rapidamente grupos com base em etiquetas de nós
+• Modularidade de Louvain para analisar a qualidade e as hierarquias do agrupamento
+
+
+
+-------------------------------------------------- Queries --------------------------------------------- 
+
+
+
+MATCH(b:Beneficiario)-[:RECEBEU]->(p1:Pagamento) MATCH(b1:Beneficiario)-[:RECEBEU]->(p2:Pagamento) WHERE p1.uf='GO' AND p2.uf='DF'  MERGE (b)-[c:CONHECE]->(b1) return b,c,b1 LIMIT 10
+
+
+#Conhecidos em Formosa
+MATCH(b:Beneficiario)-[:RECEBEU]->(p1:Pagamento) MATCH(b1:Beneficiario)-[:RECEBEU]->(p2:Pagamento) WHERE p1.nomeMunicipio='FORMOSA' AND p2.nomeMunicipio='FORMOSA'  MERGE (b)-[c:CONHECE]->(b1) return b,c,b1 LIMIT 12
+
+
