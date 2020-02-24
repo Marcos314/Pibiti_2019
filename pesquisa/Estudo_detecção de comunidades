@@ -20,4 +20,6 @@ MATCH(b:Beneficiario)-[:RECEBEU]->(p1:Pagamento) MATCH(b1:Beneficiario)-[:RECEBE
 #Conhecidos em Formosa
 MATCH(b:Beneficiario)-[:RECEBEU]->(p1:Pagamento) MATCH(b1:Beneficiario)-[:RECEBEU]->(p2:Pagamento) WHERE p1.nomeMunicipio='FORMOSA' AND p2.nomeMunicipio='FORMOSA'  MERGE (b)-[c:CONHECE]->(b1) return b,c,b1 LIMIT 12
 
+#Processamento adicional usando a cláusula WITH
 
+MATCH(b:Beneficiario)-[:RECEBEU]-(p:Pagamento) WITH b, count(b) AS qtdRecebimento, COLLECT(p.uf) as estado WHERE qtdRecebimento >1 AND qtdRecebimento<4 RETURN b.name, qtdRecebimento, estado
