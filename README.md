@@ -1,6 +1,6 @@
 ![](https://github.com/Marcos314/Pibiti_2019/blob/master/banner%20tcc.jpg)
 # Pibiti_2019
-Modelo computacional para identificar movimentos migratórios de populações de baixa renda
+Modelo computacional para identificar movimentos migratórios de populações de baixa renda através de dados abertos do bolsa familia.
 
 Clonar o repositório: git clone https://github.com/Marcos314/Pibiti_2019.git
 
