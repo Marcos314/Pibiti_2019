@@ -8,10 +8,7 @@ Forneceremos detalhes sobre os algoritmos de detecção da comunidade mais repre
 • Propagação de etiquetas para inferir rapidamente grupos com base em etiquetas de nós
 • Modularidade de Louvain para analisar a qualidade e as hierarquias do agrupamento
 
-
-
--------------------------------------------------- Queries --------------------------------------------- 
-
+-------------------------------------------------- Queries ---------------------------------------------
 
 
 MATCH(b:Beneficiario)-[:RECEBEU]->(p1:Pagamento) MATCH(b1:Beneficiario)-[:RECEBEU]->(p2:Pagamento) WHERE p1.uf='GO' AND p2.uf='DF'  MERGE (b)-[c:CONHECE]->(b1) return b,c,b1 LIMIT 10
@@ -20,6 +17,12 @@ MATCH(b:Beneficiario)-[:RECEBEU]->(p1:Pagamento) MATCH(b1:Beneficiario)-[:RECEBE
 #Conhecidos em Formosa
 MATCH(b:Beneficiario)-[:RECEBEU]->(p1:Pagamento) MATCH(b1:Beneficiario)-[:RECEBEU]->(p2:Pagamento) WHERE p1.nomeMunicipio='FORMOSA' AND p2.nomeMunicipio='FORMOSA'  MERGE (b)-[c:CONHECE]->(b1) return b,c,b1 LIMIT 12
 
-#Processamento adicional usando a cláusula WITH
+#Query usada para verificar se o Beneficiario recebeu em mais de um estado, e a qntd de vezes que recebeu em determinado estado
 
 MATCH(b:Beneficiario)-[:RECEBEU]-(p:Pagamento) WITH b, count(b) AS qtdRecebimento, COLLECT(p.uf) as estado WHERE qtdRecebimento >1 AND qtdRecebimento<4 RETURN b.name, qtdRecebimento, estado
+
+#Query usada para verificar se o Beneficiario recebeu em mais de um estado, e a qntd de vezes que recebeu em determinada cidade
+
+MATCH(b:Beneficiario)-[:RECEBEU]-(p:Pagamento) WITH b, count(b) AS qtdRecebimento, COLLECT(DISTINCT p.codigoMunicipio) as cod_cidade WHERE qtdRecebimento >1  RETURN b.nome, qtdRecebimento, estado
+
+ 

@@ -1,0 +1,1 @@
+df = spark.read.format("com.databricks.spark.csv").option("header","true").option("delimitier",";").load("/home/pibiti/dados/201301.csv")

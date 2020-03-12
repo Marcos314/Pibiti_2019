@@ -4,7 +4,7 @@ services:
     script:
         build: .
         volumes:
-            - ./:/home/script
+            - ./:/home/script/
         command: python3 script_popula_neo4j.py                
     neo4j:
         image: neo4j:latest
@@ -12,7 +12,7 @@ services:
             - '7474:7474'
             - '7687:7687'
         volumes:
-            - $HOME/neo4j/neo4j-core1/data:/data
+            - $HOME/neo4j/data:/data
 
         environment:
             NEO4J_AUTH: none
