@@ -13,5 +13,4 @@ Para realizar o download dos dados usados nesse projeto você pode usar o script
   docker-compose up neo4j
 
 - Para executar o script para popular o banco de dados neo4j: 
-  docker-compose up neo4j
-  
+  docker-compose up script
