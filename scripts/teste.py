@@ -1,18 +1,14 @@
-import csv
+a = (10**6) + 5
+b= 10**5
 
-with open('/home/marcos/Desktop/dados_teste/teste_1.csv', "r") as file:
+c = a//b
 
-    reader = csv.reader(file)
+d =  (c % 2)
 
-    head = next(reader)
+print(f"d= {d}")
+
+print(c)
+print(type(c))
+
+
     
-    
-    print(f"First Line {head}")
-
-    print(len(head))
-
-
-
-
-    for row in reader:
-        print(row)
