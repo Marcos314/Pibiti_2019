@@ -15,10 +15,10 @@ class BolsaFamilia:
         self.GRAPH.run("MATCH (n) DETACH DELETE n;")
 
     def loadDatabase(self):
-        files = [f for f in os.listdir("/home/marcos/Documentos") if f.startswith('201') and f.endswith('.csv')]
+        files = [f for f in os.listdir("/home/marcos/Desktop/TCC_2020/dados") if f.startswith('201') and f.endswith('.csv')]
         #print(files)
         for filename in files:
-            filename = 'dados/' + filename
+            #filename = 'dados/' + filename
             print(filename)
             for dataframe in pd.read_csv( filename, sep=";", chunksize=10 ** 6):
                 for index, linha in dataframe.iterrows():
