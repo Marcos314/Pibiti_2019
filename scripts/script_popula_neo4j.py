@@ -9,7 +9,7 @@ import sys
 import os
 
 class BolsaFamilia:
-    GRAPH = Graph("bolt://localhost:7687")
+    GRAPH = Graph("bolt://neo4j:7687")
 
     def cleanDatabase(self):
         self.GRAPH.run("MATCH (n) DETACH DELETE n;")
@@ -43,5 +43,5 @@ class BolsaFamilia:
                         tx.commit()
 print('inicio')
 bf = BolsaFamilia()
-bf.cleanDatabase()
+#bf.cleanDatabase()
 bf.loadDatabase()
