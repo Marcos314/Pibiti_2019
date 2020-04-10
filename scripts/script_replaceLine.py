@@ -1,6 +1,7 @@
 
 import os
 import sh
+import csv
 
 #SCRIPT PARAR REMOVER ASPAS DUPLAS
 
@@ -15,9 +16,13 @@ for file in os.listdir(directory):
         path = str(directory[2:-1] + filename)
         
         print(path)
+
+        reader = csv.reader(filename, delimiter=';')
+        head = next(reader)
+        reader = csv.reader(filename)
         
-        sh.sed("-i", "s/\"//g", path)
-        #sh.sed("-i", "s/0,/0./g", path)
+        sh.sed("-i", "s/\"//g", path)        #Remover aspas duplas
+        #sh.sed("-i", "s/,00//g", path)      #Remover casas decimais com zeros no final
     
         
         #sh.sed("-i", "1s/.*/" + "var" + "/", filename)

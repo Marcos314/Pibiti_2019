@@ -1,30 +1,22 @@
-import csv
 import pandas as pd
 
-with open('/home/marcos/Desktop/dados_teste/testeW2.csv', "w") as file_w:
 
-    with open('/home/marcos/Desktop/TCC_2020/dados/201501.csv', "r") as file:
-        
-        reader = csv.reader(file)
-        head = next(reader)
+filename = '/home/marcos/Desktop/dados_teste/201501.csv'
 
-        reader = csv.reader(file)
+df = pd.read_csv(filename, sep=',')
+df2 = pd.read_csv(filename, sep=',')
 
-        writer = csv.writer(file_w)
-        writer.writerow(head)  
 
-        df = pd.read_csv('/home/marcos/Desktop/TCC_2020/dados/201501.csv', low_memory=False)       
 
-        bigCount = 0
-        limInsercao = 10**3
-        ten = 10
-        count = 10
-        lista = []
-        for row  in reader:
+df.query('UF == "DF"').to_csv('/home/marcos/Desktop/dados_teste/testeW3.csv', index=False)
+df2.query('UF == "GO"').to_csv('/home/marcos/Desktop/dados_teste/testeW3.csv', mode='a', index=False)
 
-            if df.columns[2] == 'UF':
-                lista = row                
-                writer = csv.writer(file_w)
-                writer.writerow(lista)
+print(df.query('UF == "DF"'))
 
-        print(lista)
+
+    
+   
+       
+    
+
+    
