@@ -1,0 +1,9 @@
+﻿Relatório de atividades desenvolvidas
+
+	Inicialmente foi realizada a coleta dos dados brutos do portal da transparência. Em seguida, realizou-se o estudo de escrita de alguns sccripts em python para “tratar” os dados, colocando os mesmos em um formato único. Após esse processo no qual foi retirado casas decimais sem importância, por exemplo, os valores das parcelas que como 127,00 se tornaram 127. Todas as aspas duplas foram retiradas e o ponto e virgula foi substituído apenas por virgula, obtendo com isso o formato csv padrão.
+
+Imagem do formato dos dados após a mudança do nome das colunas
+
+
+
+Imagem do formato dos dados após o tratamento.
