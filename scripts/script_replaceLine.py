@@ -5,7 +5,7 @@ import csv
 
 #SCRIPT PARAR REMOVER ASPAS DUPLAS
 
-directory = os.fsencode("/home/marcos/Desktop/dados_teste/to_replaceLine/")
+directory = os.fsencode("/home/marcos/Desktop/TCC_2020/dados/")
 
 for file in os.listdir(directory):
        
@@ -22,7 +22,7 @@ for file in os.listdir(directory):
         reader = csv.reader(filename)
         
         sh.sed("-i", "s/\"//g", path)        #Remover aspas duplas
-        #sh.sed("-i", "s/,00//g", path)      #Remover casas decimais com zeros no final
-    
+        sh.sed("-i", "s/,00//g", path)      #Remover casas decimais com zeros no final
+        sh.sed("-i", "s/;/,/g", path)       #Remover ;
         
         #sh.sed("-i", "1s/.*/" + "var" + "/", filename)
