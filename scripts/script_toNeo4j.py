@@ -7,6 +7,8 @@ import pandas as pd
 from py2neo import *
 import sys
 import os
+import time
+
 
 class BolsaFamilia:
     GRAPH = Graph("bolt://localhost:7687")
@@ -14,16 +16,22 @@ class BolsaFamilia:
     def cleanDatabase(self):
         self.GRAPH.run("MATCH (n) DETACH DELETE n;")
 
+
     def loadDatabase(self):
-        files = [f for f in os.listdir("/home/marcos/Desktop/dados_teste/") if f.startswith('te') and f.endswith('3.csv')]
+        start_time = time.time()
+        now = datetime.now()
+
+        #directory = '/home/marcos/Desktop/Pibiti_2019/scripts/'
+        files = [f for f in os.listdir('/home/marcos/Desktop/Pibiti_2019/scripts/') if f.startswith('20') and f.endswith('.csv')]
         #print(files)
         for filename in files:
-            #filename = 'dados/' + filename
-            print(filename)
-            #for dataframe in pd.read_csv( filename, sep=','):
-            dataframe = pd.read_csv(filename)
-            print(dataframe.info())
-            for index, linha in dataframe.iterrows():
+            #filename = 'clean_data/' + filename
+            print('ARQUIVO:',filename)
+            for dataframe in pd.read_csv( filename,chunksize=10 ** 6):
+                print('OK')
+                dataframe = pd.read_csv(filename)
+                print(dataframe.info())
+                for index, linha in dataframe.iterrows():
                     sys.stdout.write('.')
                     tx = self.GRAPH.begin()
                     p = Node("Pagamento", 
@@ -42,8 +50,18 @@ class BolsaFamilia:
                     tx.merge(b, "Beneficiario", "nis")
                     b_p = Relationship(b, "RECEBEU", p)
                     tx.create(b_p)
-                    tx.commit()
+                    tx.commit() #ver batch do IPEA/RAIS
+        
+        spend = time.time() - start_time
+        hour = spend//3600
+        spend %= 3600
+        minutes = spend//60
+        spend %= 60
+        second = spend
+        print(f"Tempo gasto loadDatabase() -> Time: {int(minutes)}min, {round(second,2)}s")
+    
 print('inicio')
 bf = BolsaFamilia()
 bf.cleanDatabase()
 bf.loadDatabase()
+

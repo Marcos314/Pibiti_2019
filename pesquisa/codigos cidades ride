@@ -1,0 +1,55 @@
+9701
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+df2.query('CODIGO_MUNICIPIO_SIAFE == "9645"').to_csv('/home/marcos/Desktop/dados_teste/testeW3.csv', mode='a', index=False) #mode 'a' não exclui os dados existentes
+df2.query('CODIGO_MUNICIPIO_SIAFE == "9771"').to_csv('/home/marcos/Desktop/dados_teste/testeW3.csv', mode='a', index=False) #mode 'a' não exclui os dados existentes
+df2.query('CODIGO_MUNICIPIO_SIAFE == "1052"').to_csv('/home/marcos/Desktop/dados_teste/testeW3.csv', mode='a', index=False) #mode 'a' não exclui os dados existentes
+df2.query('CODIGO_MUNICIPIO_SIAFE == "9205"').to_csv('/home/marcos/Desktop/dados_teste/testeW3.csv', mode='a', index=False) #mode 'a' não exclui os dados existentes
+df2.query('CODIGO_MUNICIPIO_SIAFE == "9211"').to_csv('/home/marcos/Desktop/dados_teste/testeW3.csv', mode='a', index=False) #mode 'a' não exclui os dados existentes
+df2.query('CODIGO_MUNICIPIO_SIAFE == "9215"').to_csv('/home/marcos/Desktop/dados_teste/testeW3.csv', mode='a', index=False) #mode 'a' não exclui os dados existentes
+df2.query('CODIGO_MUNICIPIO_SIAFE == "9263"').to_csv('/home/marcos/Desktop/dados_teste/testeW3.csv', mode='a', index=False) #mode 'a' não exclui os dados existentes
+df2.query('CODIGO_MUNICIPIO_SIAFE == "9279"').to_csv('/home/marcos/Desktop/dados_teste/testeW3.csv', mode='a', index=False) #mode 'a' não exclui os dados existentes
+df2.query('CODIGO_MUNICIPIO_SIAFE == "5407"').to_csv('/home/marcos/Desktop/dados_teste/testeW3.csv', mode='a', index=False) #mode 'a' não exclui os dados existentes
+df2.query('CODIGO_MUNICIPIO_SIAFE == "0578"').to_csv('/home/marcos/Desktop/dados_teste/testeW3.csv', mode='a', index=False) #mode 'a' não exclui os dados existentes
+df2.query('CODIGO_MUNICIPIO_SIAFE == "4185"').to_csv('/home/marcos/Desktop/dados_teste/testeW3.csv', mode='a', index=False) #mode 'a' não exclui os dados existentes
+df2.query('CODIGO_MUNICIPIO_SIAFE == "4089"').to_csv('/home/marcos/Desktop/dados_teste/testeW3.csv', mode='a', index=False) #mode 'a' não exclui os dados existentes
+df2.query('CODIGO_MUNICIPIO_SIAFE == "1068"').to_csv('/home/marcos/Desktop/dados_teste/testeW3.csv', mode='a', index=False) #mode 'a' não exclui os dados existentes
+df2.query('CODIGO_MUNICIPIO_SIAFE == "0067"').to_csv('/home/marcos/Desktop/dados_teste/testeW3.csv', mode='a', index=False) #mode 'a' não exclui os dados existentes
+df2.query('CODIGO_MUNICIPIO_SIAFE == "1066"').to_csv('/home/marcos/Desktop/dados_teste/testeW3.csv', mode='a', index=False) #mode 'a' não exclui os dados existentes
+df2.query('CODIGO_MUNICIPIO_SIAFE == "9305"').to_csv('/home/marcos/Desktop/dados_teste/testeW3.csv', mode='a', index=False) #mode 'a' não exclui os dados existentes
+df2.query('CODIGO_MUNICIPIO_SIAFE == "9755"').to_csv('/home/marcos/Desktop/dados_teste/testeW3.csv', mode='a', index=False) #mode 'a' não exclui os dados existentes
+df2.query('CODIGO_MUNICIPIO_SIAFE == "9597"').to_csv('/home/marcos/Desktop/dados_teste/testeW3.csv', mode='a', index=False) #mode 'a' não exclui os dados existentes
+df2.query('CODIGO_MUNICIPIO_SIAFE == "9677"').to_csv('/home/marcos/Desktop/dados_teste/testeW3.csv', mode='a', index=False) #mode 'a' não exclui os dados existentes
+df2.query('CODIGO_MUNICIPIO_SIAFE == "9595"').to_csv('/home/marcos/Desktop/dados_teste/testeW3.csv', mode='a', index=False) #mode 'a' não exclui os dados existentes
+df2.query('CODIGO_MUNICIPIO_SIAFE == "9509"').to_csv('/home/marcos/Desktop/dados_teste/testeW3.csv', mode='a', index=False) #mode 'a' não exclui os dados existentes
+df2.query('CODIGO_MUNICIPIO_SIAFE == "1058"').to_csv('/home/marcos/Desktop/dados_teste/testeW3.csv', mode='a', index=False) #mode 'a' não exclui os dados existentes
+df2.query('CODIGO_MUNICIPIO_SIAFE == "9931"').to_csv('/home/marcos/Desktop/dados_teste/testeW3.csv', mode='a', index=False) #mode 'a' não exclui os dados existentes
+df2.query('CODIGO_MUNICIPIO_SIAFE == "9445"').to_csv('/home/marcos/Desktop/dados_teste/testeW3.csv', mode='a', index=False) #mode 'a' não exclui os dados existentes
+df2.query('CODIGO_MUNICIPIO_SIAFE == "9361"').to_csv('/home/marcos/Desktop/dados_teste/testeW3.csv', mode='a', index=False) #mode 'a' não exclui os dados existentes
+df2.query('CODIGO_MUNICIPIO_SIAFE == "9371"').to_csv('/home/marcos/Desktop/dados_teste/testeW3.csv', mode='a', index=False) #mode 'a' não exclui os dados existentes
+df2.query('CODIGO_MUNICIPIO_SIAFE == "9445"').to_csv('/home/marcos/Desktop/dados_teste/testeW3.csv', mode='a', index=False) #mode 'a' não exclui os dados existentes
+df2.query('CODIGO_MUNICIPIO_SIAFE == "0077"').to_csv('/home/marcos/Desktop/dados_teste/testeW3.csv', mode='a', index=False) #mode 'a' não exclui os dados existentes
+df2.query('CODIGO_MUNICIPIO_SIAFE == "0055"').to_csv('/home/marcos/Desktop/dados_teste/testeW3.csv', mode='a', index=False) #mode 'a' não exclui os dados existentes
+df2.query('CODIGO_MUNICIPIO_SIAFE == "9317"').to_csv('/home/marcos/Desktop/dados_teste/testeW3.csv', mode='a', index=False) #mode 'a' não exclui os dados existentes
+df2.query('CODIGO_MUNICIPIO_SIAFE == "9359"').to_csv('/home/marcos/Desktop/dados_teste/testeW3.csv', mode='a', index=False) #mode 'a' não exclui os dados existentes
+df2.query('CODIGO_MUNICIPIO_SIAFE == "9325"').to_csv('/home/marcos/Desktop/dados_teste/testeW3.csv', mode='a', index=False) #mode 'a' não exclui os dados existentes
+df2.query('CODIGO_MUNICIPIO_SIAFE == "9543"').to_csv('/home/marcos/Desktop/dados_teste/testeW3.csv', mode='a', index=False) #mode 'a' não exclui os dados existentes
+df2.query('CODIGO_MUNICIPIO_SIAFE == "9489"').to_csv('/home/marcos/Desktop/dados_teste/testeW3.csv', mode='a', index=False) #mode 'a' não exclui os dados existentes
