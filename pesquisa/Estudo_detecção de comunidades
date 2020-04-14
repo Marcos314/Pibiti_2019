@@ -30,3 +30,6 @@ MATCH(b:Beneficiario)-[r:RECEBEU]-(p:Pagamento) WHERE b.nome='RITA DE CASSIA RIB
 
 #QUERY DE OURO
 MATCH (b:Beneficiario)-[:RECEBEU]-(p:Pagamento) WITH b.nome AS nome, COLLECT(DISTINCT p.uf) AS estado WHERE size(estado) >1  RETURN nome, estado
+
+#Contando a quantidade de registros do estado
+MATCH (b:Beneficiario)-[:RECEBEU]-(p:Pagamento) WITH b.nis AS identificacao, COLLECT(DISTINCT p.uf) AS estado, COUNT(p.uf) AS qtdEstado WHERE size(estado) >1  RETURN identificacao, estado, qtdEstado
