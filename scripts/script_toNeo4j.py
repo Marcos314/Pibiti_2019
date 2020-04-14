@@ -8,6 +8,7 @@ from py2neo import *
 import sys
 import os
 import time
+import csv
 
 
 class BolsaFamilia:
@@ -58,7 +59,9 @@ class BolsaFamilia:
         minutes = spend//60
         spend %= 60
         second = spend
-        print(f"Tempo gasto loadDatabase() -> Time: {int(minutes)}min, {round(second,2)}s")
+        print(f"Tempo gasto para importação -> Time: {int(minutes)}min, {round(second,2)}s")
+
+
     
 print('inicio')
 bf = BolsaFamilia()

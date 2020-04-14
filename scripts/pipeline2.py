@@ -10,48 +10,48 @@ import time
 #SCRIPT PARAR REMOVER ASPAS DUPLAS, ,00
 
 
-def replaceLine():
+# def replaceLine():
 
-    start_time = time.time()
-    now = datetime.now()
-    print('\nFUNÇÃO: replaceLine\n')
+#     start_time = time.time()
+#     now = datetime.now()
+#     print('\nFUNÇÃO: replaceLine\n')
     
     
 
-    path = input("Informe o diretório: ")
-    print(path)
-    directory = os.fsencode(path)
+#     path = input("Informe o diretório: ")
+#     print(path)
+#     directory = os.fsencode(path)
     
 
-    for file in os.listdir(directory):        
-        filename = os.fsdecode(file)
+#     for file in os.listdir(directory):        
+#         filename = os.fsdecode(file)
 
-        print(f"----- ARQUIVO: {filename} -----\n ")
-        if filename.endswith(".csv"):
+#         print(f"----- ARQUIVO: {filename} -----\n ")
+#         if filename.endswith(".csv"):
 
-            directory = str(directory)
+#             directory = str(directory)
             
-            path = str(directory[2:-1] + filename)
+#             path = str(directory[2:-1] + filename)
             
-            print(path)
+#             print(path)
 
-            reader = csv.reader(filename, delimiter=';')
-            head = next(reader)
-            reader = csv.reader(filename)
-            path2 = '/home/marcos/Desktop/dados_teste/clean_data/'
-            sh.sed("-i", "s/\"//g", path)        #Remover aspas duplas
-            sh.sed("-i", "1s/ /_/g" , path)      #Alterar primeira linha do arquivo
-            sh.sed("-i", "s/,00//g", path)      #Remover casas decimais com zeros no final
-            sh.sed("-i", "s/;/,/g", path)       #Trocar ; por ,
+#             reader = csv.reader(filename, delimiter=';')
+#             head = next(reader)
+#             reader = csv.reader(filename)
+#             path2 = '/home/marcos/Desktop/dados_teste/clean_data/'
+#             sh.sed("-i", "s/\"//g", path)        #Remover aspas duplas
+#             sh.sed("-i", "1s/ /_/g" , path)      #Alterar primeira linha do arquivo
+#             sh.sed("-i", "s/,00//g", path)      #Remover casas decimais com zeros no final
+#             sh.sed("-i", "s/;/,/g", path)       #Trocar ; por ,
 
-    spend = time.time() - start_time
-    hour = spend//3600
-    spend %= 3600
-    minutes = spend//60
-    spend %= 60
-    second = spend
+#     spend = time.time() - start_time
+#     hour = spend//3600
+#     spend %= 3600
+#     minutes = spend//60
+#     spend %= 60
+#     second = spend
 
-    print(f"Tempo gasto replaceLine() -> Time: {int(minutes)}min, {round(second,2)}s")
+#     print(f"Tempo gasto replaceLine() -> Time: {int(minutes)}min, {round(second,2)}s")
 
 #FUNÇÃO PARA OBTER REGISTROS APENAS DE DOIS ESTADOS (GO E DF)
 def filterUf():
@@ -65,53 +65,74 @@ def filterUf():
     print(path)
     directory = os.fsencode(path)
 
-    for file in os.listdir(directory):        
-        filename = os.fsdecode(file)
+    files = [f for f in os.listdir(path) if f.startswith('2013') and f.endswith('02.csv')] 
+    
+    for filename in files:
+
+        #filename = os.fsdecode(file)
+        file = filename
         print("ARQUIVO:", filename, "\n")     
 
-    #filename = '/home/marcos/Desktop/dados_teste/to_replaceLine/201706.csv'
+        #filename = '/home/marcos/Desktop/dados_teste/to_replaceLine/201706.csv' /media/marcos/DISPOSITIVO/pibiti/dados
 
-        df = pd.read_csv(filename, sep=',')
-        df2 = pd.read_csv(filename, sep=',')
+        filename = f'{path}/{filename}'
+        df = pd.read_csv(filename)
+        print('ok')
+        df2 = pd.read_csv(filename)
+        print('ok')
 
-
-        df.query('UF == "DF"').to_csv(f'/home/marcos/Desktop/dados_teste/clean_data/{filename}', index=False)
+        
+        df.query('UF == "DF"').to_csv(f'/home/marcos/Desktop/dados_teste/clean_data/{file}', index=False)
         #df2.query('UF == "GO"').to_csv('/home/marcos/Desktop/dados_teste/201301_ok.csv', mode='a', index=False) #mode 'a' não exclui os dados existentes
-        df2.query('CODIGO_MUNICIPIO_SIAFI == "9645"').to_csv(f"/home/marcos/Desktop/dados_teste/clean_data/{filename}", mode='a', index=False) #mode 'a' não exclui os dados existentes
-        df2.query('CODIGO_MUNICIPIO_SIAFI == "9771"').to_csv(f"/home/marcos/Desktop/dados_teste/clean_data/{filename}", mode='a', index=False) #mode 'a' não exclui os dados existentes
-        df2.query('CODIGO_MUNICIPIO_SIAFI == "1052"').to_csv(f"/home/marcos/Desktop/dados_teste/clean_data/{filename}", mode='a', index=False) #mode 'a' não exclui os dados existentes
-        df2.query('CODIGO_MUNICIPIO_SIAFI == "9205"').to_csv(f"/home/marcos/Desktop/dados_teste/clean_data/{filename}", mode='a', index=False) #mode 'a' não exclui os dados existentes
-        df2.query('CODIGO_MUNICIPIO_SIAFI == "9211"').to_csv(f"/home/marcos/Desktop/dados_teste/clean_data/{filename}", mode='a', index=False) #mode 'a' não exclui os dados existentes
-        df2.query('CODIGO_MUNICIPIO_SIAFI == "9215"').to_csv(f"/home/marcos/Desktop/dados_teste/clean_data/{filename}", mode='a', index=False) #mode 'a' não exclui os dados existentes
-        df2.query('CODIGO_MUNICIPIO_SIAFI == "9263"').to_csv(f"/home/marcos/Desktop/dados_teste/clean_data/{filename}", mode='a', index=False) #mode 'a' não exclui os dados existentes
-        df2.query('CODIGO_MUNICIPIO_SIAFI == "9279"').to_csv(f"/home/marcos/Desktop/dados_teste/clean_data/{filename}", mode='a', index=False) #mode 'a' não exclui os dados existentes
-        df2.query('CODIGO_MUNICIPIO_SIAFI == "5407"').to_csv(f"/home/marcos/Desktop/dados_teste/clean_data/{filename}", mode='a', index=False) #mode 'a' não exclui os dados existentes
-        df2.query('CODIGO_MUNICIPIO_SIAFI == "0578"').to_csv(f"/home/marcos/Desktop/dados_teste/clean_data/{filename}", mode='a', index=False) #mode 'a' não exclui os dados existentes
-        df2.query('CODIGO_MUNICIPIO_SIAFI == "4185"').to_csv(f"/home/marcos/Desktop/dados_teste/clean_data/{filename}", mode='a', index=False) #mode 'a' não exclui os dados existentes
-        df2.query('CODIGO_MUNICIPIO_SIAFI == "4089"').to_csv(f"/home/marcos/Desktop/dados_teste/clean_data/{filename}", mode='a', index=False) #mode 'a' não exclui os dados existentes
-        df2.query('CODIGO_MUNICIPIO_SIAFI == "1068"').to_csv(f"/home/marcos/Desktop/dados_teste/clean_data/{filename}", mode='a', index=False) #mode 'a' não exclui os dados existentes
-        df2.query('CODIGO_MUNICIPIO_SIAFI == "0067"').to_csv(f"/home/marcos/Desktop/dados_teste/clean_data/{filename}", mode='a', index=False) #mode 'a' não exclui os dados existentes
-        df2.query('CODIGO_MUNICIPIO_SIAFI == "1066"').to_csv(f"/home/marcos/Desktop/dados_teste/clean_data/{filename}", mode='a', index=False) #mode 'a' não exclui os dados existentes
-        df2.query('CODIGO_MUNICIPIO_SIAFI == "9305"').to_csv(f"/home/marcos/Desktop/dados_teste/clean_data/{filename}", mode='a', index=False) #mode 'a' não exclui os dados existentes
-        df2.query('CODIGO_MUNICIPIO_SIAFI == "9755"').to_csv(f"/home/marcos/Desktop/dados_teste/clean_data/{filename}", mode='a', index=False) #mode 'a' não exclui os dados existentes
-        df2.query('CODIGO_MUNICIPIO_SIAFI == "9597"').to_csv(f"/home/marcos/Desktop/dados_teste/clean_data/{filename}", mode='a', index=False) #mode 'a' não exclui os dados existentes
-        df2.query('CODIGO_MUNICIPIO_SIAFI == "9677"').to_csv(f"/home/marcos/Desktop/dados_teste/clean_data/{filename}", mode='a', index=False) #mode 'a' não exclui os dados existentes
-        df2.query('CODIGO_MUNICIPIO_SIAFI == "9595"').to_csv(f"/home/marcos/Desktop/dados_teste/clean_data/{filename}", mode='a', index=False) #mode 'a' não exclui os dados existentes
-        df2.query('CODIGO_MUNICIPIO_SIAFI == "9509"').to_csv(f"/home/marcos/Desktop/dados_teste/clean_data/{filename}", mode='a', index=False) #mode 'a' não exclui os dados existentes
-        df2.query('CODIGO_MUNICIPIO_SIAFI == "1058"').to_csv(f"/home/marcos/Desktop/dados_teste/clean_data/{filename}", mode='a', index=False) #mode 'a' não exclui os dados existentes
-        df2.query('CODIGO_MUNICIPIO_SIAFI == "9931"').to_csv(f"/home/marcos/Desktop/dados_teste/clean_data/{filename}", mode='a', index=False) #mode 'a' não exclui os dados existentes
-        df2.query('CODIGO_MUNICIPIO_SIAFI == "9445"').to_csv(f"/home/marcos/Desktop/dados_teste/clean_data/{filename}", mode='a', index=False) #mode 'a' não exclui os dados existentes
-        df2.query('CODIGO_MUNICIPIO_SIAFI == "9361"').to_csv(f"/home/marcos/Desktop/dados_teste/clean_data/{filename}", mode='a', index=False) #mode 'a' não exclui os dados existentes
-        df2.query('CODIGO_MUNICIPIO_SIAFI == "9371"').to_csv(f"/home/marcos/Desktop/dados_teste/clean_data/{filename}", mode='a', index=False) #mode 'a' não exclui os dados existentes
-        df2.query('CODIGO_MUNICIPIO_SIAFI == "9445"').to_csv(f"/home/marcos/Desktop/dados_teste/clean_data/{filename}", mode='a', index=False) #mode 'a' não exclui os dados existentes
-        df2.query('CODIGO_MUNICIPIO_SIAFI == "0077"').to_csv(f"/home/marcos/Desktop/dados_teste/clean_data/{filename}", mode='a', index=False) #mode 'a' não exclui os dados existentes
-        df2.query('CODIGO_MUNICIPIO_SIAFI == "0055"').to_csv(f"/home/marcos/Desktop/dados_teste/clean_data/{filename}", mode='a', index=False) #mode 'a' não exclui os dados existentes
-        df2.query('CODIGO_MUNICIPIO_SIAFI == "9317"').to_csv(f"/home/marcos/Desktop/dados_teste/clean_data/{filename}", mode='a', index=False) #mode 'a' não exclui os dados existentes
-        df2.query('CODIGO_MUNICIPIO_SIAFI == "9359"').to_csv(f"/home/marcos/Desktop/dados_teste/clean_data/{filename}", mode='a', index=False) #mode 'a' não exclui os dados existentes
-        df2.query('CODIGO_MUNICIPIO_SIAFI == "9325"').to_csv(f"/home/marcos/Desktop/dados_teste/clean_data/{filename}", mode='a', index=False) #mode 'a' não exclui os dados existentes
-        df2.query('CODIGO_MUNICIPIO_SIAFI == "9543"').to_csv(f"/home/marcos/Desktop/dados_teste/clean_data/{filename}", mode='a', index=False) #mode 'a' não exclui os dados existentes
-        df2.query('CODIGO_MUNICIPIO_SIAFI == "9489"').to_csv(f"/home/marcos/Desktop/dados_teste/clean_data/{filename}", mode='a', index=False) #mode 'a' não exclui os dados existentes
+        print('OK')
+        df2.query('CODIGO_MUNICIPIO_SIAFI == "9645"').to_csv(f"/home/marcos/Desktop/dados_teste/clean_data/{file}", mode='a', index=False) #mode 'a' não exclui os dados existentes
+        df2.query('CODIGO_MUNICIPIO_SIAFI == "9771"').to_csv(f"/home/marcos/Desktop/dados_teste/clean_data/{file}", mode='a', index=False) #mode 'a' não exclui os dados existentes
+        df2.query('CODIGO_MUNICIPIO_SIAFI == "1052"').to_csv(f"/home/marcos/Desktop/dados_teste/clean_data/{file}", mode='a', index=False) #mode 'a' não exclui os dados existentes
+        df2.query('CODIGO_MUNICIPIO_SIAFI == "9205"').to_csv(f"/home/marcos/Desktop/dados_teste/clean_data/{file}", mode='a', index=False) #mode 'a' não exclui os dados existentes
+        df2.query('CODIGO_MUNICIPIO_SIAFI == "9211"').to_csv(f"/home/marcos/Desktop/dados_teste/clean_data/{file}", mode='a', index=False) #mode 'a' não exclui os dados existentes
+        df2.query('CODIGO_MUNICIPIO_SIAFI == "9215"').to_csv(f"/home/marcos/Desktop/dados_teste/clean_data/{file}", mode='a', index=False) #mode 'a' não exclui os dados existentes
+        df2.query('CODIGO_MUNICIPIO_SIAFI == "9263"').to_csv(f"/home/marcos/Desktop/dados_teste/clean_data/{file}", mode='a', index=False) #mode 'a' não exclui os dados existentes
+        df2.query('CODIGO_MUNICIPIO_SIAFI == "9279"').to_csv(f"/home/marcos/Desktop/dados_teste/clean_data/{file}", mode='a', index=False) #mode 'a' não exclui os dados existentes
+        df2.query('CODIGO_MUNICIPIO_SIAFI == "5407"').to_csv(f"/home/marcos/Desktop/dados_teste/clean_data/{file}", mode='a', index=False) #mode 'a' não exclui os dados existentes
+        df2.query('CODIGO_MUNICIPIO_SIAFI == "0578"').to_csv(f"/home/marcos/Desktop/dados_teste/clean_data/{file}", mode='a', index=False) #mode 'a' não exclui os dados existentes
+        df2.query('CODIGO_MUNICIPIO_SIAFI == "4185"').to_csv(f"/home/marcos/Desktop/dados_teste/clean_data/{file}", mode='a', index=False) #mode 'a' não exclui os dados existentes
+        df2.query('CODIGO_MUNICIPIO_SIAFI == "4089"').to_csv(f"/home/marcos/Desktop/dados_teste/clean_data/{file}", mode='a', index=False) #mode 'a' não exclui os dados existentes
+        df2.query('CODIGO_MUNICIPIO_SIAFI == "1068"').to_csv(f"/home/marcos/Desktop/dados_teste/clean_data/{file}", mode='a', index=False) #mode 'a' não exclui os dados existentes
+        df2.query('CODIGO_MUNICIPIO_SIAFI == "0067"').to_csv(f"/home/marcos/Desktop/dados_teste/clean_data/{file}", mode='a', index=False) #mode 'a' não exclui os dados existentes
+        df2.query('CODIGO_MUNICIPIO_SIAFI == "1066"').to_csv(f"/home/marcos/Desktop/dados_teste/clean_data/{file}", mode='a', index=False) #mode 'a' não exclui os dados existentes
+        df2.query('CODIGO_MUNICIPIO_SIAFI == "9305"').to_csv(f"/home/marcos/Desktop/dados_teste/clean_data/{file}", mode='a', index=False) #mode 'a' não exclui os dados existentes
+        df2.query('CODIGO_MUNICIPIO_SIAFI == "9755"').to_csv(f"/home/marcos/Desktop/dados_teste/clean_data/{file}", mode='a', index=False) #mode 'a' não exclui os dados existentes
+        df2.query('CODIGO_MUNICIPIO_SIAFI == "9597"').to_csv(f"/home/marcos/Desktop/dados_teste/clean_data/{file}", mode='a', index=False) #mode 'a' não exclui os dados existentes
+        df2.query('CODIGO_MUNICIPIO_SIAFI == "9677"').to_csv(f"/home/marcos/Desktop/dados_teste/clean_data/{file}", mode='a', index=False) #mode 'a' não exclui os dados existentes
+        df2.query('CODIGO_MUNICIPIO_SIAFI == "9595"').to_csv(f"/home/marcos/Desktop/dados_teste/clean_data/{file}", mode='a', index=False) #mode 'a' não exclui os dados existentes
+        df2.query('CODIGO_MUNICIPIO_SIAFI == "9509"').to_csv(f"/home/marcos/Desktop/dados_teste/clean_data/{file}", mode='a', index=False) #mode 'a' não exclui os dados existentes
+        df2.query('CODIGO_MUNICIPIO_SIAFI == "1058"').to_csv(f"/home/marcos/Desktop/dados_teste/clean_data/{file}", mode='a', index=False) #mode 'a' não exclui os dados existentes
+        df2.query('CODIGO_MUNICIPIO_SIAFI == "9931"').to_csv(f"/home/marcos/Desktop/dados_teste/clean_data/{file}", mode='a', index=False) #mode 'a' não exclui os dados existentes
+        df2.query('CODIGO_MUNICIPIO_SIAFI == "9445"').to_csv(f"/home/marcos/Desktop/dados_teste/clean_data/{file}", mode='a', index=False) #mode 'a' não exclui os dados existentes
+        df2.query('CODIGO_MUNICIPIO_SIAFI == "9361"').to_csv(f"/home/marcos/Desktop/dados_teste/clean_data/{file}", mode='a', index=False) #mode 'a' não exclui os dados existentes
+        df2.query('CODIGO_MUNICIPIO_SIAFI == "9371"').to_csv(f"/home/marcos/Desktop/dados_teste/clean_data/{file}", mode='a', index=False) #mode 'a' não exclui os dados existentes
+        df2.query('CODIGO_MUNICIPIO_SIAFI == "9445"').to_csv(f"/home/marcos/Desktop/dados_teste/clean_data/{file}", mode='a', index=False) #mode 'a' não exclui os dados existentes
+        df2.query('CODIGO_MUNICIPIO_SIAFI == "0077"').to_csv(f"/home/marcos/Desktop/dados_teste/clean_data/{file}", mode='a', index=False) #mode 'a' não exclui os dados existentes
+        df2.query('CODIGO_MUNICIPIO_SIAFI == "0055"').to_csv(f"/home/marcos/Desktop/dados_teste/clean_data/{file}", mode='a', index=False) #mode 'a' não exclui os dados existentes
+        df2.query('CODIGO_MUNICIPIO_SIAFI == "9317"').to_csv(f"/home/marcos/Desktop/dados_teste/clean_data/{file}", mode='a', index=False) #mode 'a' não exclui os dados existentes
+        df2.query('CODIGO_MUNICIPIO_SIAFI == "9359"').to_csv(f"/home/marcos/Desktop/dados_teste/clean_data/{file}", mode='a', index=False) #mode 'a' não exclui os dados existentes
+        df2.query('CODIGO_MUNICIPIO_SIAFI == "9325"').to_csv(f"/home/marcos/Desktop/dados_teste/clean_data/{file}", mode='a', index=False) #mode 'a' não exclui os dados existentes
+        df2.query('CODIGO_MUNICIPIO_SIAFI == "9543"').to_csv(f"/home/marcos/Desktop/dados_teste/clean_data/{file}", mode='a', index=False) #mode 'a' não exclui os dados existentes
+        df2.query('CODIGO_MUNICIPIO_SIAFI == "9489"').to_csv(f"/home/marcos/Desktop/dados_teste/clean_data/{file}", mode='a', index=False) #mode 'a' não exclui os dados existentes
 
+        # with open('/home/marcos/Desktop/dados_teste/log.txt', "w") as file_w:
+        #     writer = csv.writer(file_w)
+        #     writer.writerows(f"ARQUIVO: {file}\n")
+        
+        # spend = time.time() - start_time
+        # hour = spend//3600
+        # spend %= 3600
+        # minutes = spend//60
+        # spend %= 60
+        # second = spend
+        # with open('/home/marcos/Desktop/dados_teste/log.txt', "w") as file_w:
+        #     writer = csv.writer(file_w)
+        #     writer.writerow(f"Tempo gasto p/arquivo -> Time: {int(hour)}h, {int(minutes)}min, {round(second,2)}s\n")
 
     spend = time.time() - start_time
     hour = spend//3600
@@ -120,65 +141,84 @@ def filterUf():
     spend %= 60
     second = spend
 
-    print(f"Tempo gasto filterUF() -> Time: {int(minutes)}min, {round(second,2)}s")
+    print(f"Tempo gasto filterUF() -> Time: {int(hour)}h, {int(minutes)}min, {round(second,2)}s")
+    with open('/home/marcos/Desktop/dados_teste/log.txt', "w") as file_w:
+        writer = csv.writer(file_w)
+        writer.writerow(f"Tempo Total -> Time: {int(hour)}h, {int(minutes)}min, {round(second,2)}s")
 
 
-replaceLine()
-#filterUf()
+#replaceLine()
+# filterUf()
 '''INÍCIO DA FUNÇÃO PRINCIPAL'''
-# def main():
+def main():
 
-#     replaceLine()
-#     filterUf()
+    # replaceLine()
+    #filterUf()
 
-#     #IMPORTAÇÃO PARA O NEO4J
-#     inicio = time.time()
-#     class BolsaFamilia:
-#         GRAPH = Graph("bolt://localhost:7687")
+    #IMPORTAÇÃO PARA O NEO4J
+   
+    class BolsaFamilia:
+        GRAPH = Graph("bolt://localhost:7687")
 
-#         def cleanDatabase(self):
-#             self.GRAPH.run("MATCH (n) DETACH DELETE n;")
+        def cleanDatabase(self):
+            self.GRAPH.run("MATCH (n) DETACH DELETE n;")
 
-#         def loadDatabase(self):
-#             files = [f for f in os.listdir("/home/marcos/Desktop/Pibiti_2019/scripts/") if f.startswith('20') and f.endswith('2.csv')]
-#             #print(files)
-#             for filename in files:
-#                 #filename = 'dados/' + filename
-#                 print(filename)
-#                 #for dataframe in pd.read_csv( filename, sep=','):
-#                 dataframe = pd.read_csv(filename)
-#                 print(dataframe.info())
-#                 for index, linha in dataframe.iterrows():
-#                         sys.stdout.write('.')
-#                         tx = self.GRAPH.begin()
-#                         p = Node("Pagamento", 
-#                             mesReferencia=linha['MES_REFERENCIA'],
-#                             mesCompetencia=linha['MES_COMPETENCIA'], 
-#                             nomeMunicipio=linha['NOME_MUNICIPIO'], 
-#                             valorParcela=linha['VALOR_PARCELA'],
-#                             codigoMunicipio=linha['CODIGO_MUNICIPIO_SIAFI'],
-#                             uf=linha['UF']
-#                             )
-#                         b = Node("Beneficiario", 
-#                             nome=linha['NOME_FAVORECIDO'], 
-#                             nis=linha['NIS_FAVORECIDO']
-#                         )
-#                         tx.create(p)
-#                         tx.merge(b, "Beneficiario", "nis")
-#                         b_p = Relationship(b, "RECEBEU", p)
-#                         tx.create(b_p)
-#                         tx.commit() #ver batch do IPEA/RAIS    
+        def loadDatabase(self):
+            print('Inicio LoadDatabase\n')
+            start_time = time.time()
+            files = [f for f in os.listdir("/home/marcos/Desktop/dados_teste/clean_data/") if f.startswith('2013') and f.endswith('02.csv')]
+            #print(files)
+            for filename in files:
+                #filename = 'dados/' + filename
+               
+                files = str(files)
+                filename = f'/home/marcos/Desktop/dados_teste/clean_data/{filename}'
+                print(filename)
+               
+               
+                #for dataframe in pd.read_csv( filename, sep=','):                
+                dataframe = pd.read_csv(filename)
+                print(dataframe.info())
+                for index, linha in dataframe.iterrows():
+                        sys.stdout.write('.')
+                        tx = self.GRAPH.begin()
+                        p = Node("Pagamento", 
+                            mesReferencia=linha['MES_REFERENCIA'],
+                            mesCompetencia=linha['MES_COMPETENCIA'], 
+                            nomeMunicipio=linha['NOME_MUNICIPIO'], 
+                            valorParcela=linha['VALOR_PARCELA'],
+                            codigoMunicipio=linha['CODIGO_MUNICIPIO_SIAFI'],
+                            uf=linha['UF']
+                            )
+                        b = Node("Beneficiario", 
+                            nome=linha['NOME_FAVORECIDO'], 
+                            nis=linha['NIS_FAVORECIDO']
+                        )
+                        tx.create(p)
+                        tx.merge(b, "Beneficiario", "nis")
+                        b_p = Relationship(b, "RECEBEU", p)
+                        tx.create(b_p)
+                        tx.commit() #ver batch do IPEA/RAIS  
+            
+            '''TIME'''
+            spend = time.time() - start_time
+            hour = spend//3600
+            spend %= 3600
+            minutes = spend//60
+            spend %= 60
+            second = spend
+
+            print(f"Tempo gasto filterUF() -> Time: {int(hour)}h, {int(minutes)}min, {round(second,2)}s")  
         
-#     print('inicio')
-#     bf = BolsaFamilia()
-#     bf.cleanDatabase()
-#     bf.loadDatabase()
+    #print('inicio')
+    bf = BolsaFamilia()
+    #bf.cleanDatabase()
+    bf.loadDatabase()
 
-#     fim = time.time()
-#     print(f'Tempo gasto: {fim} - {inicio}')
+   
 
-# '''FIM DA MAIN'''
+'''FIM DA MAIN'''
 
-# if __name__ == '__main__':
-#    main()
+if __name__ == '__main__':
+   main()
 
