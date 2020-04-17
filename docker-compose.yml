@@ -24,7 +24,7 @@ services:
             - $HOME/neo4j/neo4j-pibiti/plugins:/plugins
 
         environment:
-            NEO4J_AUTH: none
+            NEO4J_AUTH: none            
             #NEO4J_dbms_connectors_default__listen__address: 0.0.0.0
 
 
