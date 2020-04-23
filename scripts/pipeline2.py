@@ -6,7 +6,8 @@ import time
 import os
 import sh
 import csv
-import time 
+import time
+import gc
 #SCRIPT PARAR REMOVER ASPAS DUPLAS, ,00
 
 
@@ -61,11 +62,12 @@ def filterUf():
     start_time = time.time()
     now = datetime.now()
 
-    path = input("Informe o diretório: ")
+    #path = input("Informe o diretório: ")
+    path = '/media/marcos/DISPOSITIVO/pibiti/dados'
     print(path)
     directory = os.fsencode(path)
 
-    files = [f for f in os.listdir(path) if f.startswith('2013') and f.endswith('01.csv')] 
+    files = [f for f in os.listdir(path) if f.startswith('20130') and f.endswith('2.csv')] 
     
     for filename in files:
 
@@ -76,32 +78,28 @@ def filterUf():
         #filename = '/home/marcos/Desktop/dados_teste/to_replaceLine/201706.csv' /media/marcos/DISPOSITIVO/pibiti/dados
 
         filename = f'{path}/{filename}'
-        df = pd.read_csv(filename)
-        
-        df2 = pd.read_csv(filename)
-      
 
-        print('DF\n')
-        df.query('UF == "DF"').to_csv(f'/home/marcos/Desktop/dados_teste/clean_data/{file}', index=False)
+        #Otimização de memória
+
+        sample = pd.read_csv(filename, low_memory=False, nrows=1000)
+        types = sample.dtypes
+        types = types.apply(str)
+        dict_types = types.to_dict()
+
+        chunks = []
+        for chunk in pd.read_csv(filename,low_memory=False,dtype=dict_types,chunksize=1000):
+            chunks.append(chunk)
+
+        df = pd.concat(chunks)
+
+        #df = pd.read_csv(filename)
+
+        #df2 = pd.read_csv(filename)
+        #print('DF\n')
+        #df.query('UF == "DF"').to_csv(f'/home/marcos/Desktop/dados_teste/clean_data/{file}', index=False)
         #df2.query('UF == "GO"').to_csv('/home/marcos/Desktop/dados_teste/201301_ok.csv', mode='a', index=False) #mode 'a' não exclui os dados existentes
         print('RIDE\n')
-        df2.query('CODIGO_MUNICIPIO_SIAFI in ["9645","9645","9771","1052","9205","9211","9215","9263","9279","5407","0578","4185","4089","1068","0067","1066","9305","9755","9597","9677","9595","9509","1058","9931","9445","9361","9371","9445","0077","0055","9317","9359","9325","9543","9489" ]').to_csv(f"/home/marcos/Desktop/dados_teste/clean_data/{file}", mode='a', index=False) #mode 'a' não exclui os dados existentes
-
-       
-
-        # with open('/home/marcos/Desktop/dados_teste/log.txt', "w") as file_w:
-        #     writer = csv.writer(file_w)
-        #     writer.writerows(f"ARQUIVO: {file}\n")
-        
-        # spend = time.time() - start_time
-        # hour = spend//3600
-        # spend %= 3600
-        # minutes = spend//60
-        # spend %= 60
-        # second = spend
-        # with open('/home/marcos/Desktop/dados_teste/log.txt', "w") as file_w:
-        #     writer = csv.writer(file_w)
-        #     writer.writerow(f"Tempo gasto p/arquivo -> Time: {int(hour)}h, {int(minutes)}min, {round(second,2)}s\n")
+        df.query('CODIGO_MUNICIPIO_SIAFI in ["9645","9645","9771","1052","9205","9211","9215","9263","9279","5407","0578","4185","4089","1068","0067","1066","9305","9755","9597","9677","9595","9509","1058","9931","9445","9361","9371","9445","0077","0055","9317","9359","9325","9543","9489","9701"]').to_csv(f"/home/marcos/Desktop/dados_teste/to_replaceLine/{file}", mode='a', index=False) #mode 'a' não exclui os dados existentes
 
     spend = time.time() - start_time
     hour = spend//3600
@@ -111,9 +109,11 @@ def filterUf():
     second = spend
 
     print(f"Tempo gasto filterUF() -> Time: {int(hour)}h, {int(minutes)}min, {round(second,2)}s")
-    with open('/home/marcos/Desktop/dados_teste/log.txt', "w") as file_w:
+    with open('/home/marcos/Desktop/dados_teste/log.txt', "a+") as file_w:
+        writer1 = file_w.write(f"Arquivo: {file}\n")
         writer = file_w.write(f"Tempo Total -> Time: {int(hour)}h, {int(minutes)}min, {round(second,2)}s")
-        
+    
+    
 
 
 #replaceLine()
@@ -135,7 +135,7 @@ filterUf()
 #         def loadDatabase(self):
 #             print('Inicio LoadDatabase\n')
 #             start_time = time.time()
-#             files = [f for f in os.listdir("/home/marcos/Desktop/dados_teste/clean_data/") if f.startswith('2013') and f.endswith('03.csv')]
+#             files = [f for f in os.listdir("/home/marcos/Desktop/dados_teste/clean_data/") if f.startswith('2014') and f.endswith('01.csv')]
 #             #print(files)
 #             for filename in files:
 #                 #filename = 'dados/' + filename

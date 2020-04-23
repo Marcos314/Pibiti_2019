@@ -113,7 +113,7 @@ def filterUf():
 '''INÍCIO DA FUNÇÃO PRINCIPAL'''
 # def main():
 
-#     replaceLine()
+#     replaceLine() 
 #     filterUf()
 
 #     #IMPORTAÇÃO PARA O NEO4J
@@ -168,4 +168,4 @@ def filterUf():
 #    main()
 
 #replaceLine()
-filterUf()
+#filterUf()
