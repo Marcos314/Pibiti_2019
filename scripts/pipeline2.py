@@ -11,48 +11,48 @@ import gc
 #SCRIPT PARAR REMOVER ASPAS DUPLAS, ,00
 
 
-# def replaceLine():
+def replaceLine():
 
-#     start_time = time.time()
-#     now = datetime.now()
-#     print('\nFUNÇÃO: replaceLine\n')
+    start_time = time.time()
+    now = datetime.now()
+    print('\nFUNÇÃO: replaceLine\n')
     
     
 
-#     path = input("Informe o diretório: ")
-#     print(path)
-#     directory = os.fsencode(path)
+    path = input("Informe o diretório: ")
+    print(path)
+    directory = os.fsencode(path)
     
 
-#     for file in os.listdir(directory):        
-#         filename = os.fsdecode(file)
+    for file in os.listdir(directory):        
+        filename = os.fsdecode(file)
 
-#         print(f"----- ARQUIVO: {filename} -----\n ")
-#         if filename.endswith(".csv"):
+        print(f"----- ARQUIVO: {filename} -----\n ")
+        if filename.endswith(".csv"):
 
-#             directory = str(directory)
+            directory = str(directory)
             
-#             path = str(directory[2:-1] + filename)
+            path = str(directory[2:-1] + filename)
             
-#             print(path)
+            print(path)
 
-#             reader = csv.reader(filename, delimiter=';')
-#             head = next(reader)
-#             reader = csv.reader(filename)
-#             path2 = '/home/marcos/Desktop/dados_teste/clean_data/'
-#             sh.sed("-i", "s/\"//g", path)        #Remover aspas duplas
-#             sh.sed("-i", "1s/ /_/g" , path)      #Alterar primeira linha do arquivo
-#             sh.sed("-i", "s/,00//g", path)      #Remover casas decimais com zeros no final
-#             sh.sed("-i", "s/;/,/g", path)       #Trocar ; por ,
+            reader = csv.reader(filename, delimiter=';')
+            head = next(reader)
+            reader = csv.reader(filename)
+            path2 = '/home/marcos/Desktop/dados_teste/clean_data/'
+            sh.sed("-i", "s/\"//g", path)        #Remover aspas duplas
+            sh.sed("-i", "1s/ /_/g" , path)      #Alterar primeira linha do arquivo
+            sh.sed("-i", "s/,00//g", path)      #Remover casas decimais com zeros no final
+            sh.sed("-i", "s/;/,/g", path)       #Trocar ; por ,
 
-#     spend = time.time() - start_time
-#     hour = spend//3600
-#     spend %= 3600
-#     minutes = spend//60
-#     spend %= 60
-#     second = spend
+    spend = time.time() - start_time
+    hour = spend//3600
+    spend %= 3600
+    minutes = spend//60
+    spend %= 60
+    second = spend
 
-#     print(f"Tempo gasto replaceLine() -> Time: {int(minutes)}min, {round(second,2)}s")
+    print(f"Tempo gasto replaceLine() -> Time: {int(minutes)}min, {round(second,2)}s")
 
 #FUNÇÃO PARA OBTER REGISTROS APENAS DE DOIS ESTADOS (GO E DF)
 def filterUf():
@@ -117,80 +117,73 @@ def filterUf():
 
 
 #replaceLine()
-filterUf()
+#filterUf()
 '''INÍCIO DA FUNÇÃO PRINCIPAL'''
-# def main():
+def main():
 
-#     #replaceLine()
-#     filterUf()
+    #replaceLine()
+    #filterUf()
 
-#     #IMPORTAÇÃO PARA O NEO4J
-   
-#     class BolsaFamilia:
-#         GRAPH = Graph("bolt://localhost:7687")
+    #IMPORTAÇÃO PARA O NEO4J   
+    class BolsaFamilia:
+        GRAPH = Graph("bolt://localhost:7687")
 
-#         def cleanDatabase(self):
-#             self.GRAPH.run("MATCH (n) DETACH DELETE n;")
+        def cleanDatabase(self):
+            self.GRAPH.run("MATCH (n) DETACH DELETE n;")
 
-#         def loadDatabase(self):
-#             print('Inicio LoadDatabase\n')
-#             start_time = time.time()
-#             files = [f for f in os.listdir("/home/marcos/Desktop/dados_teste/clean_data/") if f.startswith('2014') and f.endswith('01.csv')]
-#             #print(files)
-#             for filename in files:
-#                 #filename = 'dados/' + filename
+        def loadDatabase(self):
+            print('Inicio LoadDatabase\n')
+            start_time = time.time()
+            files = [f for f in os.listdir("/home/marcos/Desktop/dados_teste/clean_data/") if f.startswith('2014') and f.endswith('01.csv')]
+            #print(files)
+            for filename in files:
+                               
+                files = str(files)
+                filename = f'/home/marcos/Desktop/dados_teste/clean_data/{filename}'
                
-#                 files = str(files)
-#                 filename = f'/home/marcos/Desktop/dados_teste/clean_data/{filename}'
+                #for dataframe in pd.read_csv( filename, sep=','):                
+                dataframe = pd.read_csv(filename) #MUDAR ESSA LEITURA P/OTMIZAÇÃO DA MEMÓRIA
                 
-               
-               
-#                 #for dataframe in pd.read_csv( filename, sep=','):                
-#                 dataframe = pd.read_csv(filename)
+                for index, linha in dataframe.iterrows():
+                        sys.stdout.write('.')
+                        tx = self.GRAPH.begin()
+                        p = Node("Pagamento", 
+                            mesReferencia=linha['MES_REFERENCIA'],
+                            mesCompetencia=linha['MES_COMPETENCIA'], 
+                            nomeMunicipio=linha['NOME_MUNICIPIO'], 
+                            valorParcela=linha['VALOR_PARCELA'],
+                            codigoMunicipio=linha['CODIGO_MUNICIPIO_SIAFI'],
+                            uf=linha['UF']
+                            )
+                        b = Node("Beneficiario", 
+                            nome=linha['NOME_FAVORECIDO'], 
+                            nis=linha['NIS_FAVORECIDO']
+                        )
+                        tx.create(p)
+                        tx.merge(b, "Beneficiario", "nis")
+                        b_p = Relationship(b, "RECEBEU", p)
+                        tx.create(b_p)
+                        tx.commit() #ver batch do IPEA/RAIS  
                 
-#                 for index, linha in dataframe.iterrows():
-#                         sys.stdout.write('.')
-#                         tx = self.GRAPH.begin()
-#                         p = Node("Pagamento", 
-#                             mesReferencia=linha['MES_REFERENCIA'],
-#                             mesCompetencia=linha['MES_COMPETENCIA'], 
-#                             nomeMunicipio=linha['NOME_MUNICIPIO'], 
-#                             valorParcela=linha['VALOR_PARCELA'],
-#                             codigoMunicipio=linha['CODIGO_MUNICIPIO_SIAFI'],
-#                             uf=linha['UF']
-#                             )
-#                         b = Node("Beneficiario", 
-#                             nome=linha['NOME_FAVORECIDO'], 
-#                             nis=linha['NIS_FAVORECIDO']
-#                         )
-#                         tx.create(p)
-#                         tx.merge(b, "Beneficiario", "nis")
-#                         b_p = Relationship(b, "RECEBEU", p)
-#                         tx.create(b_p)
-#                         tx.commit() #ver batch do IPEA/RAIS  
-                
-#                 print(filename)
-#                 print(dataframe.info())
+                print(filename)
+                print(dataframe.info())
 
-#             '''TIME'''
-#             spend = time.time() - start_time
-#             hour = spend//3600
-#             spend %= 3600
-#             minutes = spend//60
-#             spend %= 60
-#             second = spend
+            '''TIME'''
+            spend = time.time() - start_time
+            hour = spend//3600
+            spend %= 3600
+            minutes = spend//60
+            spend %= 60
+            second = spend
 
-#             print(f"\nTempo gasto filterUF() -> Time: {int(hour)}h, {int(minutes)}min, {round(second,2)}s")  
+            print(f"\nTempo gasto filterUF() -> Time: {int(hour)}h, {int(minutes)}min, {round(second,2)}s")  
         
-#     #print('inicio')
-#     bf = BolsaFamilia()
-#     #bf.cleanDatabase()
-#     bf.loadDatabase()
+    #print('inicio')
+    bf = BolsaFamilia()
+    #bf.cleanDatabase()
+    bf.loadDatabase()
+'''FIM DA MAIN'''
 
-   
-
-# '''FIM DA MAIN'''
-
-# if __name__ == '__main__':
-#    main()
+if __name__ == '__main__':
+   main()
 
