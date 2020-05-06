@@ -2,7 +2,7 @@
 FROM_ENCODING="iso-8859-1"
 TO_ENCODING="UTF-8"
 for i in $(seq 2013 2013); do
-	for j in $(seq 1 1); do
+	for j in $(seq 8 8); do
 		if [ $j -le 10 ]; then
                 	wget http://www.portaltransparencia.gov.br/download-de-dados/bolsa-familia-pagamentos/${i}0${j} -O ${i}0${j}.zip
                 	unzip ${i}0${j}.zip
