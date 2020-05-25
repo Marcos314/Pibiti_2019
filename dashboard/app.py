@@ -1,48 +1,75 @@
-# -*- coding: utf-8 -*-
+#Imports
 import dash
 import dash_core_components as dcc
 import dash_html_components as html
+import pandas as pd
 
 external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
-
 app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
 
-colors = {
-    'background': '#999',
-    'text': '#11111'
-}
+#Obtendo dataframe
 
-app.layout = html.Div(style={'backgroundColor': colors['background']}, children=[
-    html.H1(
-        children='Hello Dash',
-        style={
-            'textAlign': 'center',
-            'color': colors['text']
-        }
-    ),
+df = pd.read_csv('/home/marcos/Desktop/dados/analise/pagamentosAtrasadosCidade.csv')
 
-    html.Div(children='Dash: A web application framework for Python.', style={
-        'textAlign': 'center',
-        'color': colors['text']
-    }),
+#DashBoard para mostrar tabela
+def generate_table(dataframe, max_rows=10):
+    return html.Table([
+        html.Thead(
+            html.Tr([html.Th(col) for col in dataframe.columns])
+        ),
 
-    dcc.Graph(
-        id='example-graph-2',
-        figure={
-            'data': [
-                {'x': [1, 2, 3], 'y': [4, 1, 2], 'type': 'bar', 'name': 'SF'},
-                {'x': [1, 2, 3], 'y': [2, 4, 5], 'type': 'bar', 'name': u'Montréal'},
-            ],
-            'layout': {
-                'plot_bgcolor': colors['background'],
-                'paper_bgcolor': colors['background'],
-                'font': {
-                    'color': colors['text']
-                }
+        html.Tbody([
+            html.Tr([
+                html.Td(dataframe.iloc[i][col]) for col in dataframe.columns
+            ]) for i in range(min(len(dataframe), max_rows))
+        ])
+    ])
+
+# app.layout = html.Div(children=[
+#     html.H1(children='Quantidade de beneficios em atraso por cidade'),
+#     generate_table(df)
+# ])
+
+#Visualização do dataframe em gráfico de dispersão
+
+app.layout =  html.Div([
+
+    html.Div([
+        html.H1('Quantidade de beneficios em atraso por cidade'),
+        generate_table(df)
+    ]),   
+        
+    html.Div([
+        dcc.Graph(
+            id='qtd_atraso',
+            figure={
+                'data': [
+                    dict(
+                        x = df[df['NOME_MUNICIPIO'] == i]['MES_COMPETENCIA'],
+                        y = df[df['NOME_MUNICIPIO'] == i]['MES_COMPETENCIA'],
+                        text = df[df['NOME_MUNICIPIO'] == i]['NOME_MUNICIPIO'],
+                        mode = 'markers',
+                        opacity = 0.7,
+                        marker={
+                            'size': 15,
+                            'line': {'width': 0.5, 'color': 'white'}
+                        },
+                        name=i
+                    ) for i in df.NOME_MUNICIPIO.unique()
+                ],
+                'layout': dict(
+                    xaxis={'type': 'log', 'title': 'QTD em atraso'},
+                    yaxis={'title': 'QTD em atraso'},
+                    margin={'l': 40, 'b': 40, 't': 10, 'r': 10},
+                    legend={'x': 0, 'y': 1},
+                    hovermode='closest'
+                )
             }
-        }
-    )
+        )
+    ])
 ])
+    
+
 
 if __name__ == '__main__':
     app.run_server(debug=True)
