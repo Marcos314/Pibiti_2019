@@ -1,12 +1,14 @@
 @import url('https://fonts.googleapis.com/css2?family=PT+Sans+Narrow&display=swap');
 
 html {
-    border: 0;
+    border: 0 !important;
+    margin: 0 !important;
 }
 
 body{
-    background-color:#06ac06;
+    background-color:#f0f3f5;
     border: 0;
+    margin: 0;
 }
 h1, h2, h3, h4 {
     font-family: 'PT Sans Narrow', sans-serif;
@@ -16,7 +18,8 @@ h1, h2, h3, h4 {
 
 /* Header */
 .banner{
-   border: 0px;
+    margin:0 !important;
+    border: 0px;
     height: 10rem;
     /* margin-bottom: 1rem; */
     padding: 0rem 5rem 0rem;
@@ -24,7 +27,7 @@ h1, h2, h3, h4 {
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    background-color: #fcfcfc;
+    background-color: #ffffff;
     
 }
 .banner h6 {
@@ -38,6 +41,12 @@ h1, h2, h3, h4 {
 .banner img{
     position: relative;
     height: 80%;
+    width: auto;
+
+}
+#logo1{
+    position: relative;
+    height: 100%;
     width: auto;
 
 }

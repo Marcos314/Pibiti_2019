@@ -39,6 +39,7 @@ app.layout =  html.Div([
         className="banner",
         children=[
             html.H6("PIBITI 2019"),
+            html.Img(id="logo1", src=app.get_asset_url("bf2.png")),
             html.Img(src=app.get_asset_url("ifgformosa2015resumida01.jpg"))
         ],
     ),
