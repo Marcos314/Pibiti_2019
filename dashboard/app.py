@@ -13,18 +13,18 @@ app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
 df = pd.read_csv('/home/marcos/Desktop/dados/analise/pagamentosAtrasadosCidade.csv')
 
 #DashBoard para mostrar tabela
-def generate_table(dataframe, max_rows=8):
-    return html.Table([
-        html.Thead(
-            html.Tr([html.Th(col) for col in dataframe.columns])
-        ),
+# def generate_table(dataframe, max_rows=8):
+#     return html.Table([
+#         html.Thead(
+#             html.Tr([html.Th(col) for col in dataframe.columns])
+#         ),
 
-        html.Tbody([
-            html.Tr([
-                html.Td(dataframe.iloc[i][col]) for col in dataframe.columns
-            ]) for i in range(min(len(dataframe), max_rows))
-        ])
-    ])
+#         html.Tbody([
+#             html.Tr([
+#                 html.Td(dataframe.iloc[i][col]) for col in dataframe.columns
+#             ]) for i in range(min(len(dataframe), max_rows))
+#         ])
+#     ])
 
 # app.layout = html.Div(children=[
 #     html.H1(children='Quantidade de beneficios em atraso por cidade'),
@@ -35,6 +35,7 @@ def generate_table(dataframe, max_rows=8):
 
 app.layout =  html.Div([
     
+     
     html.Div(   
         className="banner",
         children=[
@@ -81,7 +82,7 @@ app.layout =  html.Div([
 
     html.Div([
         html.H3('Quantidade de beneficios em atraso por cidade', id='title'),
-        generate_table(df)
+        
     ]),
 
     

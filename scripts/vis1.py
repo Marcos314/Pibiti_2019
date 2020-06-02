@@ -7,7 +7,7 @@ import os
 # visualizaztion modules 
 from bokeh.resources import INLINE 
 from bokeh.io import output_notebook, show, output_file 
-from bokeh.plotting import figure 
+from bokeh.plotting import figure, save 
 from bokeh.models import GeoJSONDataSource, LinearColorMapper, ColorBar 
 from bokeh.palettes import brewer,mpl 
 # interactive visualization models 
@@ -102,10 +102,8 @@ layout = column(p,widgetbox(slider))
 curdoc().add_root(layout)
 
 # Show the figure.
-output_notebook(INLINE)
-show(layout)
-
-
+output_file("map.html")
+save(p)
 
 
 
