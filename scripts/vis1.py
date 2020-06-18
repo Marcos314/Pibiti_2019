@@ -18,7 +18,7 @@ from bokeh.layouts import widgetbox, row, column
 
 
 df = pd.read_csv('/home/marcos/Desktop/dados/dadosVis/df1.csv')
-df.groupby('NOME_MUNICIPIO').head(21)
+#df.groupby('NOME_MUNICIPIO').head(21)
 
 #Lendo os arquivos shp
 gdf = gpd.read_file('/home/marcos/Desktop/dados/ride_shp/rideTotal2.shp')
@@ -50,8 +50,6 @@ def json_data(selectYear):
     merged_json = json.loads(merged.to_json())
     json_data = json.dumps(merged_json)
     return json_data
-
-#json_data(201301)
 
 # Input GeoJSON source that contains features for plotting.
 # Select a default year to show on first display.
@@ -102,11 +100,8 @@ layout = column(p,widgetbox(slider))
 curdoc().add_root(layout)
 
 # Show the figure.
-output_file("map.html")
-save(p)
-
-
-
+output_notebook(INLINE)
+show(layout)
 
 
 

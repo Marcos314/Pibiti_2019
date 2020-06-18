@@ -1,11 +1,6 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# # **Mapa Interativo ao longo do tempo**
-
-# In[1]:
-
-
 # basic modules 
 import geopandas as gpd
 import pandas as pd 
@@ -14,43 +9,19 @@ import glob
 import os 
 # visualizaztion modules 
 from bokeh.resources import INLINE 
-from bokeh.io import output_notebook, show, output_file 
-from bokeh.plotting import figure 
-from bokeh.models import GeoJSONDataSource, LinearColorMapper, ColorBar 
+from bokeh.io import output_notebook, show, output_file, curdoc, output_notebook  
+from bokeh.plotting import figure, Figure, output_file, show 
+from bokeh.models import GeoJSONDataSource, LinearColorMapper, ColorBar, ColumnDataSource, Slider, HoverTool, CustomJS
 from bokeh.palettes import brewer,mpl 
 # interactive visualization models 
-from bokeh.io import curdoc, output_notebook 
-from bokeh.models import Slider, HoverTool 
 from bokeh.layouts import widgetbox, row, column
 
 
-# In[2]:
 
+df = pd.read_csv('/home/marcos/Desktop/dados/analise/datasetValorMediaPorAno.csv')
+#df.groupby('NOME_MUNICIPIO').head(21)
 
-df = pd.read_csv('/home/marcos/Desktop/dados/analise/dataset_media_ano.csv')
-
-
-# In[3]:
-
-
-df.groupby('NOME_MUNICIPIO').head(21)
-
-
-# In[4]:
-
-
-#Lendo os arquivos shp
 gdf = gpd.read_file('/home/marcos/Desktop/dados/ride_shp/rideTotal2.shp')
-
-
-# In[5]:
-
-
-gdf.head()
-
-
-# In[8]:
-
 
 #RASCUNHO
 def json_data(selectYear):
@@ -77,11 +48,15 @@ def json_data(selectYear):
     json_data = json.dumps(merged_json)
     return json_data
 
-#json_data(201301)
 
 # Input GeoJSON source that contains features for plotting.
 # Select a default year to show on first display.
 geosource = GeoJSONDataSource(geojson = json_data(201601))
+
+
+# Source to JS
+source = ColumnDataSource(data=json_data)
+
 
 # Define a sequential multi-hue color palette.
 # I chose the Plasma theme because 10 would map to yellow :)
@@ -118,7 +93,21 @@ def update_plot(attr, old, new):
     new_data = json_data((yr))
     geosource.geojson = new_data
     p.title.text = 'Valor médio do benefício por cidade da RIDE' %yr
-    
+
+# Callback function
+callback = CustomJS(args=dict(source=source), code ="""
+    var data = source.data
+    var geosource = GeoJSONDataSource(geojson = json_data(201601))
+    var yr = cb_obj.value
+    var new_data = data((yr))
+    var geosource.geojson = new_data
+    var p.title.text = 'Valor médio do benefício por cidade da RIDE' %yr
+
+    source.change.emit();
+""")
+
+
+
 # Make a slider object.
 slider = Slider(title = 'Year',start = 2013, end = 2019, step = 1, value = 2013)
 slider.on_change('value', update_plot)
@@ -128,6 +117,7 @@ layout = column(p,widgetbox(slider))
 curdoc().add_root(layout)
 
 # Show the figure.
+output_file('map1_teste.html')
 output_notebook(INLINE)
 show(layout)
 
