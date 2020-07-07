@@ -14,3 +14,6 @@ Para realizar o download dos dados usados nesse projeto você pode usar o script
 
 - Para executar o script para popular o banco de dados neo4j: 
   docker-compose up script
+ # Visualização
+ 
+https://datapane.com/marcos/reports/stock_report/?accesstoken=a00bef7a91d87037ef54a889b25ad80785a96cab
