@@ -1,8 +1,20 @@
 .idea
+# Diretórios
+/JS
 /documentos
-/dados
 /img
 /pesquisa
 /processamento
-/notebooks/dataset_analysis/
-/notebooks/Geopandas/ride.geojson
+
+# Anotações em notebooks e dados
+/notebooks/Geopandas/.ipynb_checkpoints
+/notebooks/Analises
+/notebooks/BokehStudies/
+/notebooks/rascunho/
+
+# Dashboard
+/dashboard/teste
+
+
+
+
