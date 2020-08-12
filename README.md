@@ -14,3 +14,7 @@ Para realizar o download dos dados usados nesse projeto você pode usar o script
 
 - Para executar o script para popular o banco de dados neo4j: 
   docker-compose up script
+  
+# Visualização de alguns resultados
+![](https://github.com/Marcos314/Pibiti_2019/blob/master/ferramentas_visualizacao.png)
+https://datapane.com/marcos/reports/stock_report/?accesstoken=7f9bead762efe183995f208fefdd1fee57bd7560
