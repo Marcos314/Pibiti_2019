@@ -1,6 +1,12 @@
 <h1 align="center">
+    <img alt="Ecoleta" title="Ecoleta" src="logoIfg.jpg" height="120px" width="470px"/>
+</h1>
+
+
+<h1 align="center">
 Projeto de Iniciação Tecnológica - 2019/2020
 </h1>
+
 
 <h1 align="center">
     <img alt="Ecoleta" title="Ecoleta" src="img1.jpg" />
@@ -12,7 +18,9 @@ Projeto de Iniciação Tecnológica - 2019/2020
 Clonar o repositório: git clone https://github.com/Marcos314/Pibiti_2019.git
 
 # Download dos dados
-Para realizar o download dos dados usados nesse projeto você pode usar o script shell DownloadBolsaFamilia.sh que se encontra em: https://github.com/Marcos314/Pibiti_2019/blob/master/scripts/DownloadBolsaFamilia.sh
+Para realizar o download dos dados usados nesse projeto utilizei o script shell DownloadBolsaFamilia.sh que se encontra em: https://github.com/Marcos314/Pibiti_2019/blob/master/scripts/DownloadBolsaFamilia.sh
+
+Em breve irei disponibilizar os dados em um repositório no google drive.
 
   
 # Visualização de alguns resultados
