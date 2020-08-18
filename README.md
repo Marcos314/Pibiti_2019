@@ -1,8 +1,7 @@
 
 <img alt="" title="logoIfg" src="logo-ifg-vertical-formosa.png" height="12%" width="12%" align="right"/>
-<h1 align="center">
-    
-    Projeto de Iniciação Tecnológica - 2019/2020    
+<h1 align="center">    
+    Projeto de Iniciação Tecnológica - 2019/2020
 </h1>
 
 - **Título**: Modelo computacional para identificar movimentos migratórios de populações de baixa renda através de dados abertos do bolsa familia.
