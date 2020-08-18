@@ -10,7 +10,7 @@
 - **Orientador**: Waldeyr Mendes <a href="https://github.com/waldeyr">
   <img alt="Made by marcos-wesley" src="https://img.shields.io/badge/-GitHub-grey?style=flat&logo=GitHub&logoColor=white&link=https://github.com/waldeyr">
 </a>
-
+<br/><br/><br/>
 <p align="center">
   <a href="#-tecnologias">Tecnologias</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
   <a href="#-projeto">Projeto</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;   
