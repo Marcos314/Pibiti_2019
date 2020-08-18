@@ -7,10 +7,9 @@
 - **Título**: Modelo computacional para identificar movimentos migratórios de populações de baixa renda através de dados abertos do bolsa familia.
 
 
-- **Orientador**: Waldeyr Mendes<a href="https://github.com/waldeyr">
+- **Orientador**: Waldeyr Mendes <a href="https://github.com/waldeyr">
   <img alt="Made by marcos-wesley" src="https://img.shields.io/badge/-GitHub-grey?style=flat&logo=GitHub&logoColor=white&link=https://github.com/waldeyr">
 </a>
-
 
 <p align="center">
   <a href="#-tecnologias">Tecnologias</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
