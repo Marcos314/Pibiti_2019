@@ -4,9 +4,9 @@
     Projeto de Iniciação Tecnológica - 2019/2020
 </h1>
 
-- **Título**: Modelo computacional para identificar movimentos migratórios de populações de baixa renda através de dados abertos do bolsa familia.
+**Modelo computacional para identificar movimentos migratórios de populações de baixa renda através de dados abertos do bolsa familia**
 
-**Desenvoledor**: Marcos Wesley Soares Alves <a href="https://github.com/Marcos314" style="margin-left: 8px;">
+- **Desenvoledor**: Marcos Wesley Soares Alves <a href="https://github.com/Marcos314" style="margin-left: 8px;">
   <img alt="Made by marcos-wesley" src="https://img.shields.io/badge/-GitHub-grey?style=flat&logo=GitHub&logoColor=white&link=https://github.com/Marcos314">
 </a>
 <a href="https://www.linkedin.com/in/marcos-wesley-357951137/">
