@@ -6,11 +6,8 @@
 
 **Modelo computacional para identificar movimentos migratórios de populações de baixa renda através de dados abertos do bolsa familia**
 
-- **Desenvoledor**: Marcos Wesley Soares Alves <a href="https://github.com/Marcos314" style="margin-left: 8px;">
-  <img alt="Made by marcos-wesley" src="https://img.shields.io/badge/-GitHub-grey?style=flat&logo=GitHub&logoColor=white&link=https://github.com/Marcos314">
-</a>
-<a href="https://www.linkedin.com/in/marcos-wesley-357951137/">
-<img alt="Made by marcos-wesley" src="https://img.shields.io/badge/-LinkedIn-blue?style=flat&logo=Linkedin&logoColor=white&link=https://www.linkedin.com/in/marcos-wesley-357951137/">
+- **Desenvoledor**: Marcos Wesley Soares Alves <a href="https://github.com/Marcos314" style="margin-left: 8px;"> <img alt="Made by marcos-wesley" src="https://img.shields.io/badge/-GitHub-grey?style=flat&logo=GitHub&logoColor=white&link=https://github.com/Marcos314">
+</a> <a href="https://www.linkedin.com/in/marcos-wesley-357951137/"> <img alt="Made by marcos-wesley" src="https://img.shields.io/badge/-LinkedIn-blue?style=flat&logo=Linkedin&logoColor=white&link=https://www.linkedin.com/in/marcos-wesley-357951137/">
 </a>
 
 - **Orientador**: Waldeyr Mendes <a href="https://github.com/waldeyr">
