@@ -1,21 +1,5 @@
 .idea
 # Diretórios
-/JS
-/documentos
-/img
-/pesquisa
-/processamento
 /imagens_relatório
-# Anotações em notebooks e dados
-/notebooks/Geopandas/.ipynb_checkpoints
-/notebooks/Analises
-/notebooks/BokehStudies/
-/notebooks/rascunho/
-/notebooks_backup/
-
-# Dashboard
-/dashboard/teste
-
-
-
+/Conf
 
