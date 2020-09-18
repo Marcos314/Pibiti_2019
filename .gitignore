@@ -5,7 +5,7 @@
 /img
 /pesquisa
 /processamento
-
+/imagens_relatório
 # Anotações em notebooks e dados
 /notebooks/Geopandas/.ipynb_checkpoints
 /notebooks/Analises
