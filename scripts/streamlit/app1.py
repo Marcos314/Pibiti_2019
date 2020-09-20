@@ -2,7 +2,7 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 
-st.title('Hello World!')
+st.title('First Plot')
 
 x = st.slider('Selecione um ano')
 st.write(x, 'raiz é', x*x)
